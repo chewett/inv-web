@@ -8,6 +8,10 @@ import query, inventory
 app = Bottle()
 inv = inventory.Inventory("inventory").root
 
+def partToJson(part):
+    return {'code':part.code,
+            'name':part.name}
+
 @app.route("/query")
 def _query():
 	q = request.query.q
