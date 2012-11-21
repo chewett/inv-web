@@ -4,67 +4,49 @@
 <script>
 
 function findPart() {
-	//alert($("#code").val());
-	
-	loadPart($("#code").val());
+    loadPart($("#code").val());
 }
 
 function loadPart(code) {
-		$.getJSON('part?q=' + code, function(data) {
-			
-		$("#part_code").html(data['code']);
-		
-		for(var i in data) {
-			console.log(data[i]);
-			$("#part_" + i).html(data[i]);
-		}	
-		console.log(data);	
-	});
+        $.getJSON('part?q=' + code, function(data) {
+        
+        for(var i in data) {
+            console.log(data[i]);
+            $("#item_" + i).html(data[i]);
+        }    
+        console.log(data);    
+    });
 }
 </script>
 <style>
 div
 {
-	border-style:solid;
-	border-width:1px;
-	margin: 5px;
+    border-style:solid;
+    border-width:1px;
+    margin: 5px;
 }
 </style>
 
 </head>
 
 <body>
-	<input type='text' id='code' value='1MM2U' /> <input type='button' href='#' onClick='findPart()' />
-	
-	<div id='part'>
-		Part Details:
-		<div id='part_code'></div>
-		<div id='part_condition'></div>
-		<div id='part_description'></div>
-		<div id='part_labelled'></div>
-		<div id='part_name'></div>
-		<div id='part_path'></div>
-		<div id='part_value'></div>
-		<div id='part_lol'></div>
-	</div>
-	
+    <input type='text' id='code' value='1MM2U' /> <input type='button' href='#' onClick='findPart()' />
+    
+    <div id='item'>
+        Item Details:
+        <div id='item_code'></div>
+        <div id='item_condition'></div>
+        <div id='item_description'></div>
+        <div id='item_labelled'></div>
+        <div id='item_name'></div>
+        <div id='item_path'></div>
+        <div id='item_value'></div>
+        <div id='item_lol'></div>
+    </div>
+    
 <script>
 
 loadPart('29C');
-
-/*
-$.getJSON('part?q=29C', function(data) {
-		
-	$("#part_code").html(data['code']);
-	
-	for(var i in data) {
-		console.log(data[i]);
-		$("#part_" + i).html(data[i]);
-	}	
-	console.log(data);	
-	
-});
-*/
 
 </script>
 
