@@ -55,5 +55,9 @@ def _part():
     item = matches[0]
     return partToJson(item)
 
+@app.route("/index.html")
+def indexPage():
+    return open(PATH + "/index.html").read()
+
 if __name__ == "__main__":
 	run(app=app, port=8080)
