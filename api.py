@@ -41,7 +41,7 @@ def _query():
 	q = urllib2.unquote(q)
 	matches = query.query(q, inv)
 
-	return str({"results":[part.code for part in matches]})
+	return json.dumps({"results":[part.code for part in matches]})
 
 @app.route("/part")
 def _part():
