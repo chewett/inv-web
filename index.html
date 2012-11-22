@@ -14,28 +14,28 @@ function findPart() {
 }
 
 function query(q) {
-    $.getJSON('query?q=' + q, function(data) {
+    $.getJSON("query?q=" + q, function(data) {
         hideAllSections();
         $("#resultsBody").show();
         $("#resultsBody").html("");
 
-       for(item in data['results']) {
-           $("#resultsBody").append("<tr><td>"+ data['results'][item] +"</td></tr>");
+       for(item in data["results"]) {
+           $("#resultsBody").append("<tr><td>"+ data["results"][item] +"</td></tr>");
        }
     });
 }
 
 function loadPart(code) {
-        $.getJSON('part?q=' + code, function(data) {
+        $.getJSON("part?q=" + code, function(data) {
 
-        if(data['type'] == 'Item') {
+        if(data["type"] == "Item") {
             hideAllSections();
             $("#item").show();
 
             for(var i in data) {
                 $("#item_" + i).html(data[i]);
             }
-        }else if(data['type'] == 'ItemGroup') {
+        }else if(data["type"] == "ItemGroup") {
             hideAllSections();
             $("#itemgroup").show();
 
@@ -59,34 +59,34 @@ div
 </head>
 
 <body>
-    <input type='text' id='code' value='1MM2U' /> <input type='button' href='#' onClick='findPart()' />
+    <input type="text" id="code" value="1MM2U" /> <input type="button" href="#" onClick="findPart()" />
     
-    <div id='itemgroup' style='display:none'>
+    <div id="itemgroup" style="display:none">
         Item Group Details:
-        <div id='itemgroup_code'></div>
-        <div id='itemgroup_description'></div>
-        <div id='itemgroup_name'></div>
-        <div id='itemgroup_path'></div>
+        <div id="itemgroup_code"></div>
+        <div id="itemgroup_description"></div>
+        <div id="itemgroup_name"></div>
+        <div id="itemgroup_path"></div>
     </div>
 
-    <div id='item' style='display:none'>
+    <div id="item" style="display:none">
         Item Details:
-        <div id='item_code'></div>
-        <div id='item_condition'></div>
-        <div id='item_description'></div>
-        <div id='item_labelled'></div>
-        <div id='item_name'></div>
-        <div id='item_path'></div>
-        <div id='item_value'></div>
+        <div id="item_code"></div>
+        <div id="item_condition"></div>
+        <div id="item_description"></div>
+        <div id="item_labelled"></div>
+        <div id="item_name"></div>
+        <div id="item_path"></div>
+        <div id="item_value"></div>
     </div>
 
-    <div id='results' style='display:none'>
+    <div id="results" style="display:none">
         <table>
         <tr>
             <td>Code</td>
             <td>Name</td>
         </tr>
-        <tbody id='resultsBody'>
+        <tbody id="resultsBody">
 
         </tbody>
         </table>

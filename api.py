@@ -2,7 +2,7 @@ from bottle import Bottle, run, request, static_file
 import urllib2
 import sys, os, json
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'tools', 'python', 'inventory'))
+sys.path.append(os.path.join(os.path.dirname(__file__), "tools", "python", "inventory"))
 import query, inventory
 
 app = Bottle()
@@ -11,25 +11,25 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 def partToJson(part):
 
-    if part.__class__.__name__ == 'Item':
+    if part.__class__.__name__ == "Item":
         partInfo = {
-            'type'          : 'Item',
-            'code'          : part.code,
-            'condition'     : part.condition,
-            'description'   : part.description,
-            'labelled'      : str(part.labelled),
-            'name'          : part.name,
-            'path'          : part.path,
-            'value'         : part.value
+            "type"          : "Item",
+            "code"          : part.code,
+            "condition"     : part.condition,
+            "description"   : part.description,
+            "labelled"      : str(part.labelled),
+            "name"          : part.name,
+            "path"          : part.path,
+            "value"         : part.value
         }
 
-    elif part.__class__.__name__ == 'ItemGroup':
+    elif part.__class__.__name__ == "ItemGroup":
         partInfo = {
-            'type'          : 'ItemGroup',
-            'code'          : part.code,
-            'description'   : part.description,
-            'name'          : part.name,
-            'path'          : part.path
+            "type"          : "ItemGroup",
+            "code"          : part.code,
+            "description"   : part.description,
+            "name"          : part.name,
+            "path"          : part.path
         }
 
 
