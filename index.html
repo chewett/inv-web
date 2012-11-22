@@ -3,14 +3,21 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
 
+function hideAllSections() {
+	$("#results").hide();
+    $("#itemgroup").hide();
+    $("#item").hide();
+}
+
 function findPart() {
     loadPart($("#code").val());
 }
 
 function query(q) {
     $.getJSON('query?q=' + q, function(data) {
-       $("#resultsBody").html("");
-       $("#results").show();
+		hideAllSections();
+		$("#resultsBody").show();
+		$("#resultsBody").html("");
 
        for(item in data['results']) {
            $("#resultsBody").append("<tr><td>"+ data['results'][item] +"</td></tr>");
@@ -22,14 +29,14 @@ function loadPart(code) {
         $.getJSON('part?q=' + code, function(data) {
 
         if(data['type'] == 'Item') {
-            $("#itemgroup").hide();
+			hideAllSections();
             $("#item").show();
 
             for(var i in data) {
                 $("#item_" + i).html(data[i]);
             }
         }else if(data['type'] == 'ItemGroup') {
-            $("#item").hide();
+			hideAllSections();
             $("#itemgroup").show();
 
             for(var i in data) {
