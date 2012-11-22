@@ -7,6 +7,17 @@ function findPart() {
     loadPart($("#code").val());
 }
 
+function query(q) {
+    $.getJSON('query?q=' + q, function(data) {
+       $("#resultsBody").html("");
+       $("#results").show();
+
+       for(item in data['results']) {
+           $("#resultsBody").append("<tr><td>"+ data['results'][item] +"</td></tr>");
+       }
+    });
+}
+
 function loadPart(code) {
         $.getJSON('part?q=' + code, function(data) {
 
@@ -60,6 +71,19 @@ div
         <div id='item_name'></div>
         <div id='item_path'></div>
         <div id='item_value'></div>
+    </div>
+
+    <div id='results' style='display:none'>
+        <table>
+        <tr>
+            <td>Code</td>
+            <td>Name</td>
+        </tr>
+        <tbody id='resultsBody'>
+
+        </tbody>
+        </table>
+
     </div>
 
 </body>
