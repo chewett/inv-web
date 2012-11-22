@@ -13,10 +13,14 @@ function findPart() {
     loadPart($("#code").val());
 }
 
+function runQuery() {
+    query($("#queryBox").val());
+}
+
 function query(q) {
     $.getJSON("query?q=" + q, function(data) {
         hideAllSections();
-        $("#resultsBody").show();
+        $("#results").show();
         $("#resultsBody").html("");
 
        for(item in data["results"]) {
@@ -60,7 +64,10 @@ div
 
 <body>
     <input type="text" id="code" value="1MM2U" /> <input type="button" href="#" onClick="findPart()" />
-    
+
+    <input type="text" id="queryBox" value="cond:broken" />
+    <input type="button" href="#" onClick="runQuery()" />
+
     <div id="itemgroup" style="display:none">
         Item Group Details:
         <div id="itemgroup_code"></div>
