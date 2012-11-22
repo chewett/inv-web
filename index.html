@@ -23,9 +23,12 @@ function query(q) {
         $("#results").show();
         $("#resultsBody").html("");
 
-       for(item in data["results"]) {
-           $("#resultsBody").append("<tr><td>"+ data["results"][item] +"</td></tr>");
-       }
+        for(item in data["results"]) {
+           $("#resultsBody").append("<tr><td>"+
+                                    "<a href='#' onClick=\"loadPart('"+ data["results"][item] + "');\">"
+                                    + data["results"][item]
+                                    +"</a></td></tr>");
+        }
     });
 }
 
