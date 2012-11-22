@@ -4,7 +4,7 @@
 <script>
 
 function hideAllSections() {
-	$("#results").hide();
+    $("#results").hide();
     $("#itemgroup").hide();
     $("#item").hide();
 }
@@ -15,9 +15,9 @@ function findPart() {
 
 function query(q) {
     $.getJSON('query?q=' + q, function(data) {
-		hideAllSections();
-		$("#resultsBody").show();
-		$("#resultsBody").html("");
+        hideAllSections();
+        $("#resultsBody").show();
+        $("#resultsBody").html("");
 
        for(item in data['results']) {
            $("#resultsBody").append("<tr><td>"+ data['results'][item] +"</td></tr>");
@@ -29,14 +29,14 @@ function loadPart(code) {
         $.getJSON('part?q=' + code, function(data) {
 
         if(data['type'] == 'Item') {
-			hideAllSections();
+            hideAllSections();
             $("#item").show();
 
             for(var i in data) {
                 $("#item_" + i).html(data[i]);
             }
         }else if(data['type'] == 'ItemGroup') {
-			hideAllSections();
+            hideAllSections();
             $("#itemgroup").show();
 
             for(var i in data) {

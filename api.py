@@ -37,11 +37,11 @@ def partToJson(part):
 
 @app.route("/query")
 def _query():
-	q = request.query.q
-	q = urllib2.unquote(q)
-	matches = query.query(q, inv)
+    q = request.query.q
+    q = urllib2.unquote(q)
+    matches = query.query(q, inv)
 
-	return json.dumps({"results":[part.code for part in matches]})
+    return json.dumps({"results":[part.code for part in matches]})
 
 @app.route("/part")
 def _part():
@@ -60,4 +60,4 @@ def indexPage():
     return open(PATH + "/index.html").read()
 
 if __name__ == "__main__":
-	run(app=app, port=8080)
+    run(app=app, port=8080)
