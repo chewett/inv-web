@@ -9,12 +9,23 @@ function findPart() {
 
 function loadPart(code) {
         $.getJSON('part?q=' + code, function(data) {
-        
-        for(var i in data) {
-            console.log(data[i]);
-            $("#item_" + i).html(data[i]);
-        }    
-        console.log(data);    
+
+        if(data['type'] == 'Item') {
+            $("#itemgroup").hide();
+            $("#item").show();
+
+            for(var i in data) {
+                $("#item_" + i).html(data[i]);
+            }
+        }else if(data['type'] == 'ItemGroup') {
+            $("#item").hide();
+            $("#itemgroup").show();
+
+            for(var i in data) {
+                $("#itemgroup_" + i).html(data[i]);
+            }
+
+        }
     });
 }
 </script>
@@ -32,7 +43,15 @@ div
 <body>
     <input type='text' id='code' value='1MM2U' /> <input type='button' href='#' onClick='findPart()' />
     
-    <div id='item'>
+    <div id='itemgroup' style='display:none'>
+        Item Group Details:
+        <div id='itemgroup_code'></div>
+        <div id='itemgroup_description'></div>
+        <div id='itemgroup_name'></div>
+        <div id='itemgroup_path'></div>
+    </div>
+
+    <div id='item' style='display:none'>
         Item Details:
         <div id='item_code'></div>
         <div id='item_condition'></div>
@@ -41,14 +60,7 @@ div
         <div id='item_name'></div>
         <div id='item_path'></div>
         <div id='item_value'></div>
-        <div id='item_lol'></div>
     </div>
-    
-<script>
-
-loadPart('29C');
-
-</script>
 
 </body>
 </html>
