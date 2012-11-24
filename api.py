@@ -20,7 +20,8 @@ def partToJson(part):
             "labelled"      : str(part.labelled),
             "name"          : part.name,
             "path"          : part.path,
-            "value"         : part.value
+            "value"         : part.value,
+            "parent"        : {"code":part.parent.code, "name" : part.parent.name}
         }
 
     elif part.__class__.__name__ == "ItemGroup":

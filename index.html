@@ -55,7 +55,11 @@ function loadPart(code) {
             $("#item").show();
 
             for(var i in data) {
-                $("#item_" + i).html(data[i]);
+                if(i == "parent") {
+                    $("#item_parent").html("<a href='#' onClick=\"loadPart('" + data["parent"]["code"] + "')\">" + data["parent"]["name"] + "</a>");
+                }else{
+                    $("#item_" + i).html(data[i]);
+                }
             }
         }else if(data["type"] == "ItemGroup") {
             hideAllSections();
@@ -105,6 +109,7 @@ div
         <div>Item Name: <span id="item_name"></span></div>
         <div>Item Path: <span id="item_path"></span></div>
         <div>Item Value: <span id="item_value"></span></div>
+        <div>Item Parent: <span id="item_parent"></span></div>
     </div>
 
     <div id="results" style="display:none">
