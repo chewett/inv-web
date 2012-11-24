@@ -49,8 +49,10 @@ def _part():
     q = urllib2.unquote(q)
     matches = list(query.query("code:" + q, inv))
 
-    if len(matches) != 1:
+    if len(matches) > 1:
         return json.dumps({"error" : "Part code " + q + " apparently has multiple items associated"})
+    elif len(matches) == 0:
+        return json.dumps({"error" : "Cannot find item with part code " + q})
 
     item = matches[0]
     return partToJson(item)
