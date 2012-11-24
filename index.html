@@ -7,6 +7,7 @@ function hideAllSections() {
     $("#results").hide();
     $("#itemgroup").hide();
     $("#item").hide();
+    $("#errorBox").hide();
 }
 
 function findPart() {
@@ -17,8 +18,21 @@ function runQuery() {
     query($("#queryBox").val());
 }
 
+function errorFree(data) {
+    if("error" in data) {
+        hideAllSections();
+        $("#errorBoxMsg").html(data["error"]);
+        $("#errorBox").show();
+        return false;
+    }else{
+        return true;
+    }
+}
+
 function query(q) {
     $.getJSON("query?q=" + q, function(data) {
+        if (errorFree(data) == false) return;
+
         hideAllSections();
         $("#results").show();
         $("#resultsBody").html("");
@@ -34,6 +48,7 @@ function query(q) {
 
 function loadPart(code) {
         $.getJSON("part?q=" + code, function(data) {
+        if (errorFree(data) == false) return;
 
         if(data["type"] == "Item") {
             hideAllSections();
@@ -70,6 +85,8 @@ div
 
     <input type="text" id="queryBox" value="cond:broken" />
     <input type="button" href="#" onClick="runQuery()" />
+
+    <div id="errorBox">Error: <span id="errorBoxMsg"/></span></div>
 
     <div id="itemgroup" style="display:none">
         Item Group Details:
