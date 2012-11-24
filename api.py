@@ -50,7 +50,7 @@ def _part():
     matches = list(query.query("code:" + q, inv))
 
     if len(matches) != 1:
-        return "Part code " + q + " apparently has multiple items associated"
+        return json.dumps({"error" : "Part code " + q + " apparently has multiple items associated"})
 
     item = matches[0]
     return partToJson(item)
