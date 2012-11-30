@@ -1,6 +1,6 @@
 from bottle import Bottle, run, request, static_file
 import urllib2
-import sys, os, json
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "tools", "python", "inventory"))
 import query, inventory
@@ -32,8 +32,7 @@ def partToJson(part):
             "path"          : part.path
         }
 
-
-    return json.dumps(partInfo)
+    return partInfo
 
 @app.route("/query")
 def _query():
@@ -42,7 +41,7 @@ def _query():
     matches = query.query(q, inv)
 
     results =  [[part.code, part.name, part.path] for part in matches]
-    return json.dumps({"results": results})
+    return {"results" : results}
 
 @app.route("/part")
 def _part():
@@ -51,9 +50,9 @@ def _part():
     matches = list(query.query("code:" + q, inv))
 
     if len(matches) > 1:
-        return json.dumps({"error" : "Part code " + q + " apparently has multiple items associated"})
+        return {"error" : "Part code " + q + " apparently has multiple items associated"}
     elif len(matches) == 0:
-        return json.dumps({"error" : "Cannot find item with part code " + q})
+        return {"error" : "Cannot find item with part code " + q}
 
     item = matches[0]
     return partToJson(item)
