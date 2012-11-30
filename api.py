@@ -11,7 +11,7 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 def partToJson(part):
 
-    if part.__class__.__name__ == "Item":
+    if isinstance(Inventory.Item) is True:
         partInfo = {
             "type"          : "Item",
             "code"          : part.code,
@@ -23,8 +23,7 @@ def partToJson(part):
             "value"         : part.value,
             "parent"        : {"code":part.parent.code, "name" : part.parent.name}
         }
-
-    elif part.__class__.__name__ == "ItemGroup":
+    elif isinstance(Inventory.ItemGroup) is True:
         partInfo = {
             "type"          : "ItemGroup",
             "code"          : part.code,
