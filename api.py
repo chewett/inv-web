@@ -59,7 +59,7 @@ def _part():
 
 @app.route("/index.html")
 def indexPage():
-    return open(PATH + "/index.html").read()
+    return static_file("index.html", root=PATH)
 
 if __name__ == "__main__":
     run(app=app, port=8080)
