@@ -39,7 +39,7 @@ function query(q) {
 
         for(item in data["results"]) {
            $("#resultsBody").append("<tr><td>"+
-                                    "<a href='#' onClick=\"loadPart('"+ data["results"][item] + "');\">"
+                                    "<a href='#code:"+data["results"][item][0]+"' onClick=\"loadPart('"+ data["results"][item] + "');\">"
                                     + data["results"][item][0] +"</a></td>"
                                     +"<td>"+ data["results"][item][1] + "</td>" 
                                     +"<td>"+ data["results"][item][2] + "</td>"
@@ -128,5 +128,15 @@ div
 
     </div>
 
+
+<script>
+page = window.location.href.split("#")[1];
+
+if(page != "undefined") {
+    query(page);
+}
+
+
+</script>
 </body>
 </html>
