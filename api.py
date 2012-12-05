@@ -19,7 +19,7 @@ def partToJson(part):
             "description"   : part.description,
             "labelled"      : str(part.labelled),
             "name"          : part.name,
-            "path"          : part.path,
+            "path"          : part.path[10:],
             "value"         : part.value,
             "parent"        : {"code":part.parent.code, "name" : part.parent.name}
         }
@@ -29,7 +29,7 @@ def partToJson(part):
             "code"          : part.code,
             "description"   : part.description,
             "name"          : part.name,
-            "path"          : part.path
+            "path"          : part.path[10:]
         }
 
     return partInfo
