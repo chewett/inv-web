@@ -29,8 +29,13 @@ def partToJson(part):
             "code"          : part.code,
             "description"   : part.description,
             "name"          : part.name,
-            "path"          : part.path[10:]
+            "path"          : part.path[10:],
         }
+        
+        partInfo["children"] = list()
+        for code in part.children:
+            partInfo['children'].append( [code, part.children[code].name])
+
 
     return partInfo
 
