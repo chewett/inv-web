@@ -35,7 +35,11 @@ def part_json(part):
         partInfo["children"] = list()
         for code in part.children:
             partInfo['children'].append( [code, part.children[code].name])
-
+    elif isinstance(part, inventory.ItemTree) is True:
+        partInfo = {
+            "type"          : "ItemTree",
+            "name"          : part.name
+        }
 
     return partInfo
 
