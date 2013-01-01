@@ -66,6 +66,7 @@ def _part():
     item = matches[0]
     return part_json(item)
 
+@app.route("/")
 @app.route("/index.html")
 def indexPage():
     return static_file("index.html", root=PATH)
