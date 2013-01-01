@@ -9,7 +9,7 @@ app = Bottle()
 inv = inventory.Inventory("inventory").root
 PATH = os.path.dirname(os.path.abspath(__file__))
 
-def partToJson(part):
+def part_json(part):
 
     if isinstance(part, inventory.Item) is True:
         partInfo = {
@@ -60,7 +60,7 @@ def _part():
         return {"error" : "Cannot find item with part code " + q}
 
     item = matches[0]
-    return partToJson(item)
+    return part_json(item)
 
 @app.route("/index.html")
 def indexPage():
