@@ -71,6 +71,16 @@ function loadPart(code) {
                 $("#itemgroup_" + i).html(data[i]);
             }
 
+            $("#itemgroup_parent").html(data["parent"].path);
+
+            for(var i in data["parts"]) {
+                part = data["parts"][i];
+                var part_line = "<span>" + part.code + " - " + part.name + "</span><br />\n";
+
+
+                $("#itemgroup_parts").append(part_line);
+            }
+
         }
     });
 }
@@ -109,6 +119,8 @@ div
         <div>Item Description: <span id="itemgroup_description"></span></div>
         <div>Item Name: <span id="itemgroup_name"></span></div>
         <div>Item Path: <span id="itemgroup_path"></span></div>
+        <div>Item Parent: <span id="itemgroup_parent"></span></div>
+        <div>Item Parts: <br /><span id="itemgroup_parts"></span></div>
     </div>
 
     <div id="item" style="display:none">
