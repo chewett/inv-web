@@ -72,4 +72,4 @@ def indexPage():
     return static_file("index.html", root=PATH)
 
 if __name__ == "__main__":
-    run(app=app, port=8080)
+    run(app=app, host="0.0.0.0", port=8080)
