@@ -58,7 +58,11 @@ function loadPart(code) {
 
             for(var i in data) {
                 if(i == "parent") {
-                    $("#item_parent").html("<a href='#' onClick=\"loadPart('" + data["parent"]["code"] + "')\">" + data["parent"]["name"] + "</a>");
+                    parent_line = "<a href='#code:" + data["parent"]["code"]
+                                  + "' onClick=\"loadPart('"
+                                  + data["parent"]["code"] + "')\">"
+                                  + data["parent"]["name"] + "</a>";
+                    $("#item_parent").html(parent_line);
                 }else{
                     $("#item_" + i).html(data[i]);
                 }
