@@ -87,10 +87,19 @@ div
 </head>
 
 <body>
-    <input type="text" id="code" value="1MM2U" /> <input type="button" href="#" onClick="findPart()" />
+    <h1>Inventory Query System</h1>
 
-    <input type="text" id="queryBox" value="cond:broken" />
-    <input type="button" href="#" onClick="runQuery()" />
+    <div>
+        Part Code:
+        <input type="text" id="code" value="1MM2U" />
+        <input type="button" href="#" onClick="findPart()" />
+    </div>
+
+    <div>
+        Enter Query:
+        <input type="text" id="queryBox" value="cond:broken" />
+        <input type="button" href="#" onClick="runQuery()" />
+    </div>
 
     <div id="errorBox" style="display:none">Error: <span id="errorBoxMsg"/></span></div>
 
