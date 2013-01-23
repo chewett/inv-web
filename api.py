@@ -11,37 +11,32 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 def part_json(part):
 
+    base_info = {
+        "name"  : part.name,
+        "path"  : part.path,
+        "parent" : {"name": part.parent.name, "path": part.parent.path}
+    }
+
     if isinstance(part, inventory.Item) is True:
-        partInfo = {
+        part_info = {
             "type"          : "Item",
             "code"          : part.code,
             "condition"     : part.condition,
             "description"   : part.description,
             "labelled"      : str(part.labelled),
-            "name"          : part.name,
-            "path"          : part.path[10:],
-            "value"         : part.value,
-            "parent"        : {"code":part.parent.code, "name" : part.parent.name}
+            "value"         : part.value
         }
     elif isinstance(part, inventory.ItemGroup) is True:
-        partInfo = {
+        part_info = {
             "type"          : "ItemGroup",
             "code"          : part.code,
             "description"   : part.description,
-            "name"          : part.name,
-            "path"          : part.path[10:],
-        }
-        
-        partInfo["children"] = list()
-        for code in part.children:
-            partInfo['children'].append( [code, part.children[code].name])
-    elif isinstance(part, inventory.ItemTree) is True:
-        partInfo = {
-            "type"          : "ItemTree",
-            "name"          : part.name
+            "parts"         : [{"code": item_part.code, "name": item_part.name} for item_part in part.parts.values()]
         }
 
-    return partInfo
+    part_info = dict(part_info.items() + base_info.items())
+
+    return part_info
 
 @app.route("/query")
 def _query():
