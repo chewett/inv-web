@@ -16,6 +16,8 @@ def part_json(part):
         "path"  : part.path,
         "parent" : {"name": part.parent.name, "path": part.parent.path}
     }
+    if hasattr(part.parent, "code"):
+        base_info["parent"]["code"] = part.parent.code
 
     if isinstance(part, inventory.Item) is True:
         part_info = {
