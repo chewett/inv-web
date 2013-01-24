@@ -1,6 +1,7 @@
 from bottle import Bottle, run, request, static_file
 import urllib2
 import sys, os
+from pyparsing import ParseException
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "tools", "python", "inventory"))
 import query, inventory
@@ -44,7 +45,10 @@ def part_json(part):
 def _query():
     q = request.query.q
     q = urllib2.unquote(q)
-    matches = query.query(q, inv)
+    try:
+        matches = query.query(q, inv)
+    except ParseException:
+        return {"error" : "Query string was malformed"}
 
     results =  [[part.code, part.name, part.path] for part in matches]
     return {"results" : results}
