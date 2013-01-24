@@ -79,8 +79,9 @@ function loadPart(code) {
 
             for(var i in data["parts"]) {
                 part = data["parts"][i];
-                var part_line = "<span>" + part.code + " - " + part.name + "</span><br />\n";
-
+                var part_line = "<a href='#code:"+ part.code
+                                + "' onclick=\"loadPart('"+part.code+"')\">"
+                                + part.code + "</a> - " + part.name + "<br />\n";
 
                 $("#itemgroup_parts").append(part_line);
             }
