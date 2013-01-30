@@ -6,15 +6,22 @@ from pyparsing import ParseException
 sys.path.append(os.path.join(os.path.dirname(__file__), "tools", "python", "inventory"))
 import query, inventory
 
+INVENTORY_PATH = "inventory"
+
 app = Bottle()
-inv = inventory.Inventory("inventory").root
+inv = inventory.Inventory(INVENTORY_PATH).root
 PATH = os.path.dirname(os.path.abspath(__file__))
+
+#used to remove the "inventory" prefix,
+def clean_path(path_string):
+    return path_string[len(INVENTORY_PATH):]
+
 
 def part_json(part):
 
     base_info = {
         "name"  : part.name,
-        "path"  : part.path,
+        "path"  : clean_path(part.path),
         "parent" : {"name": part.parent.name, "path": part.parent.path}
     }
     if hasattr(part.parent, "code"):
@@ -50,7 +57,7 @@ def _query():
     except ParseException:
         return {"error" : "Query string was malformed"}
 
-    results =  [[part.code, part.name, part.path] for part in matches]
+    results =  [[part.code, part.name, clean_path(part.path)] for part in matches]
     return {"results" : results}
 
 @app.route("/part")
