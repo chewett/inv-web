@@ -20,9 +20,9 @@ def clean_path(path_string):
 def part_json(part):
 
     base_info = {
-        "name"  : part.name,
-        "path"  : clean_path(part.path),
-        "parent" : {"name": part.parent.name, "path": clean_path(part.parent.path)}
+        "name"      : part.name,
+        "path"      : clean_path(part.path),
+        "parent"    : get_parent(part.parent)
     }
     if hasattr(part.parent, "code"):
         base_info["parent"]["code"] = part.parent.code
@@ -47,6 +47,19 @@ def part_json(part):
     part_info = dict(part_info.items() + base_info.items())
 
     return part_info
+
+#should only have ItemGroup and ItemTree passed into the function
+def get_parent(part):
+    parent_info = {
+        "type"  : "ItemTree",
+        "name"  : part.name,
+        "path"  : clean_path(part.path),
+    }
+    if isinstance(part, inventory.ItemGroup) is True:
+        parent_info["type"] = "ItemGroup"
+        parent_info["code"] = part.code
+
+    return parent_info
 
 @app.route("/query")
 def _query():
