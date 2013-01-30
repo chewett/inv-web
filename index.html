@@ -123,7 +123,9 @@ div
         <div>Item Description: <span id="itemgroup_description"></span></div>
         <div>Item Path: <span id="itemgroup_path"></span></div>
         <div>Item Parent: <span id="itemgroup_parent"></span></div>
-        <div>Item Parts: <br /><span id="itemgroup_parts"></span></div>
+        <div>Item Parts: <span id="itemgroup_parts_number"></span> <a href="#" onClick='$("#itemgroup_parts").toggle()'/>Show/Hide all Parts</a>
+            <div id="itemgroup_parts" style="display:none;"></div>
+        </div>
     </div>
 
     <div id="item" style="display:none">
