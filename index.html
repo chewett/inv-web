@@ -76,6 +76,7 @@ function loadPart(code) {
             }
 
             $("#itemgroup_parent").html(data["parent"].path);
+            $("#itemgroup_parts_number").html(data["parts"].length);
 
             for(var i in data["parts"]) {
                 part = data["parts"][i];
@@ -123,7 +124,7 @@ div
         <div>Item Description: <span id="itemgroup_description"></span></div>
         <div>Item Path: <span id="itemgroup_path"></span></div>
         <div>Item Parent: <span id="itemgroup_parent"></span></div>
-        <div>Item Parts: <span id="itemgroup_parts_number"></span> <a href="#" onClick='$("#itemgroup_parts").toggle()'/>Show/Hide all Parts</a>
+        <div><span id="itemgroup_parts_number"></span> Item parts in this group <a href="#" onClick='$("#itemgroup_parts").toggle()'/>Show/Hide all Parts</a>
             <div id="itemgroup_parts" style="display:none;"></div>
         </div>
     </div>
