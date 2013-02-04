@@ -30,12 +30,15 @@ function errorFree(data) {
 }
 
 function query(q) {
+    document.location.hash = q;
     $.getJSON("query?q=" + q, function(data) {
         if (errorFree(data) == false) return;
 
         hideAllSections();
         $("#results").show();
         $("#resultsBody").html("");
+
+        $("#queryString").html(q);
 
         for(item in data["results"]) {
            $("#resultsBody").append("<tr><td>"+
@@ -49,7 +52,8 @@ function query(q) {
 }
 
 function loadPart(code) {
-        $.getJSON("part?q=" + code, function(data) {
+    document.location.hash = "code:" + code
+    $.getJSON("part?q=" + code, function(data) {
         if (errorFree(data) == false) return;
 
         if(data["type"] == "Item") {
@@ -140,6 +144,7 @@ div
     </div>
 
     <div id="results" style="display:none">
+        <div>Query String: <span id="queryString"></span></div>
         <table>
         <tr>
             <td>Code</td>
