@@ -87,10 +87,15 @@ def _part():
     item = matches[0]
     return part_json(item)
 
+
+@app.route("/static/<filename>")
+def static_resource(filename):
+    return static_file("/static/"+filename, root=PATH)
+
 @app.route("/")
 @app.route("/index.html")
-def indexPage():
-    return static_file("index.html", root=PATH)
+def index_page():
+    return static_file("/static/index.html", root=PATH)
 
 if __name__ == "__main__":
     run(app=app, host="0.0.0.0", port=8080)
