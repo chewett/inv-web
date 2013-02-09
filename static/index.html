@@ -22,15 +22,16 @@
 
 <div class="row">
     <div class="span6">
-        <h2>Part Code:</h2>
+        <strong>Part Code:</strong>
         <input type="text" id="code" value="1MM2U" />
-        <input type="button" href="#" value="View part"  onClick="findPart()" />
+        <button class="btn" onClick="findPart()">View part</button>
+
     </div>
 
     <div class="span 6">
-        <h2>Enter Query:</h2>
+        <strong>Enter Query:</strong>
         <input type="text" id="queryBox" value="cond:broken" />
-        <input type="button" href="#" value="View results" onClick="runQuery()" />
+        <button class="btn" onClick="runQuery()">View results</button>
     </div>
 </div>
 
@@ -59,9 +60,9 @@
         </div>
 
         <div id="results" style="display:none">
-            <div>Query String: <span id="queryString"></span></div>
+            <strong>Query String: </strong><span id="queryString"></span>
             <div>
-            <table>
+            <table class="table table-bordered">
             <tr>
                 <td>Code</td>
                 <td>Name</td>
