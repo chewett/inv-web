@@ -41,9 +41,12 @@
 
         <div id="itemgroup" style="display:none">
             <h2><span id="itemgroup_code"></span> - <span id="itemgroup_name"></span></h2>
-            <div>Item Description: <span id="itemgroup_description"></span></div>
-            <div>Item Path: <span id="itemgroup_path"></span></div>
-            <div>Item Parent: <span id="itemgroup_parent"></span></div>
+            <table class="table">
+                <tr><td>Item Description</td><td><span id="itemgroup_description"></span></td></tr>
+                <tr><td>Item Path</td><td><span id="itemgroup_path"></span></td></tr>
+                <tr><td>Item Parent:</td><td><span id="itemgroup_parent"></span></td></tr>
+            </table>
+
             <div><span id="itemgroup_parts_number"></span> Item parts in this group <a href="#" onClick='$("#itemgroup_parts").toggle()'/>Show/Hide all Parts</a>
                 <div id="itemgroup_parts" style="display:none;"></div>
             </div>
@@ -51,12 +54,13 @@
 
         <div id="item" style="display:none">
             <h2><span id="item_code"></span> - <span id="item_name"></span></h2>
-            <div>Item Condition: <span id="item_condition"></span></div>
-            <div>Item Description: <span id="item_description"></span></div>
-            <div>Item Labelled?: <span id="item_labelled"></span></div>
-            <div>Item Path: <span id="item_path"></span></div>
-            <div>Item Value: <span id="item_value"></span></div>
-            <div>Item Parent: <span id="item_parent"></span></div>
+            <table class="table">
+                <tr><td>Item Condition</td><td><span id="item_condition"></span></div>
+                <tr><td>Item Description</td><td><span id="item_description"></span></div>
+                <tr><td>Item Labelled?</td><td><span id="item_labelled"></span></div>
+                <tr><td>Item Path</td><td><span id="item_path"></span></div>
+                <tr><td>Item Value:</td><td><span id="item_value"></span></div>
+                <tr><td>Item Parent:</td><td> <span id="item_parent"></span></div>
         </div>
 
         <div id="results" style="display:none">
