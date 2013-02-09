@@ -1,3 +1,12 @@
+
+$(document).ready(function() {
+    page = window.location.href.split("#")[1];
+
+    if(page != undefined && page != "") {
+        query(page);
+    }
+});
+
 function hideAllSections() {
     $("#results").hide();
     $("#itemgroup").hide();
