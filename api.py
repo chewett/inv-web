@@ -88,9 +88,9 @@ def _part():
     return part_json(item)
 
 
-@app.route("/static/<filename>")
-def static_resource(filename):
-    return static_file("/static/"+filename, root=PATH)
+@app.route("/static/<directory>/<filename>")
+def static_resource(directory, filename):
+    return static_file("/static/"+directory+"/"+filename, root=PATH)
 
 @app.route("/")
 @app.route("/index.html")
