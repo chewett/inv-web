@@ -41,11 +41,10 @@ function query(q) {
         hideAllSections();
         $("#results").show();
         $("#resultsBody").html("");
-
         $("#queryString").html(q);
 
         for(item in data["results"]) {
-           $("#resultsBody").append("<tr><td>"+
+            $("#resultsBody").append("<tr><td>"+
                                     "<a href='#code:"+data["results"][item][0]+"' onClick=\"loadPart('"+ data["results"][item] + "');\">"
                                     + data["results"][item][0] +"</a></td>"
                                     +"<td>"+ data["results"][item][1] + "</td>" 
@@ -94,7 +93,6 @@ function loadPart(code) {
 
                 $("#itemgroup_parts").append(part_line);
             }
-
         }
     });
 }
