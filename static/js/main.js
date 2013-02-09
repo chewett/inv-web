@@ -62,6 +62,7 @@ function loadPart(code) {
         if(data["type"] == "Item") {
             hideAllSections();
             $("#item").show();
+            $("#item_code").attr("href", "#code:" + data["code"]);
 
             for(var i in data) {
                 if(i == "parent") {
@@ -84,6 +85,7 @@ function loadPart(code) {
 
             $("#itemgroup_parent").html(data["parent"].path);
             $("#itemgroup_parts_number").html(data["parts"].length);
+            $("#itemgroup_code").attr("href", "#code:" + data["code"]);
 
             for(var i in data["parts"]) {
                 part = data["parts"][i];
