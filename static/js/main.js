@@ -84,9 +84,19 @@ function loadPart(code) {
                 $("#itemgroup_" + i).html(data[i]);
             }
 
-            $("#itemgroup_parent").html(data["parent"].path);
+            if(data["parent"].hasOwnProperty("code")) {
+                parentLine = "<a href='#code:" + data["parent"]["code"]
+                              + "' onClick=\"loadPart('"
+                              + data["parent"]["code"] + "')\">"
+                              + data["parent"]["name"] + "</a>";
+            }else{
+                parentLine = data["parent"].path;
+            }
+
+            $("#itemgroup_parent").html(parentLine);
             $("#itemgroup_parts_number").html(data["parts"].length);
             $("#itemgroup_code").attr("href", "#code:" + data["code"]);
+            $("#itemgroup_parts").hide();
 
             for(var i in data["parts"]) {
                 part = data["parts"][i];
