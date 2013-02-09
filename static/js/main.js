@@ -63,7 +63,8 @@ function loadPart(code) {
             hideAllSections();
             $("#item").show();
             $("#item_code").attr("href", "#code:" + data["code"]);
-            $("#item_code").click(loadPart(data["code"]));
+            //TODO: this stops you loading other pages for some reason
+            //$("#item_code").click(loadPart(data["code"]));
 
             for(var i in data) {
                 if(i == "parent") {
