@@ -24,16 +24,23 @@
 
 <div class="row">
     <div class="span6">
-        <strong>Part Code:</strong>
-        <input type="text" id="code" value="1MM2U" />
-        <button class="btn" onClick="findPart()">View part</button>
-
+        <form class="form-inline">
+            <label><strong>Part Code:</strong></label>
+            <div class="input-append">
+                <input type="text" id="code" value="1MM2U" />
+                <button class="btn" onClick="findPart()">View part</button>
+            </div>
+        </form>
     </div>
 
     <div class="span 6">
-        <strong>Enter Query:</strong>
-        <input type="text" id="queryBox" value="cond:broken" />
-        <button class="btn" onClick="runQuery()">View results</button>
+        <form class="form-inline">
+            <label><strong>Enter Query:</strong></label>
+            <div class="input-append">
+                <input type="text" id="queryBox" value="cond:broken" />
+                <button class="btn" onClick="runQuery()">View results</button>
+            </div>
+        </form>
     </div>
 </div>
 
