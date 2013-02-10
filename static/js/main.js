@@ -66,6 +66,7 @@ function loadPart(code) {
             hideAllSections();
             $("#item").show();
             $("#item_code").attr("href", "#code:" + data["code"]);
+            $("#item_name").attr("href", "#type:" + data["name"]);
             //TODO: this stops you loading other pages for some reason
             //$("#item_code").click(loadPart(data["code"]));
 
@@ -100,6 +101,7 @@ function loadPart(code) {
             $("#itemgroup_parent").html(parentLine);
             $("#itemgroup_parts_number").html(data["parts"].length);
             $("#itemgroup_code").attr("href", "#code:" + data["code"]);
+            $("#itemgroup_name").attr("href", "#type:" + data["name"]);
             $("#itemgroup_table").hide();
 
             for(var i in data["parts"]) {
