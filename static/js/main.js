@@ -97,13 +97,13 @@ function loadPart(code) {
             $("#itemgroup_parent").html(parentLine);
             $("#itemgroup_parts_number").html(data["parts"].length);
             $("#itemgroup_code").attr("href", "#code:" + data["code"]);
-            $("#itemgroup_parts").hide();
+            $("#itemgroup_table").hide();
 
             for(var i in data["parts"]) {
                 part = data["parts"][i];
-                var part_line = "<a href='#code:"+ part.code
+                var part_line = "<tr><td><a href='#code:"+ part.code
                                 + "' onclick=\"loadPart('"+part.code+"')\">"
-                                + part.code + "</a> - " + part.name + "<br />\n";
+                                + part.code + "</a></td><td>" + part.name + "</td></tr>\n";
 
                 $("#itemgroup_parts").append(part_line);
             }
