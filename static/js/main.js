@@ -1,8 +1,8 @@
 
 $(document).ready(function() {
-    page = window.location.href.split("#")[1];
+    var page = window.location.href.split("#")[1];
 
-    if(page != undefined && page != "") {
+    if(page !== undefined && page !== "") {
         query(page);
     }
 });
@@ -23,9 +23,9 @@ function runQuery() {
 }
 
 function errorFree(data) {
-    if("error" in data) {
+    if(data.hasOwnProperty("error")) {
         hideAllSections();
-        $("#errorBoxMsg").html(data["error"]);
+        $("#errorBoxMsg").html(data.error);
         $("#errorBox").show();
         return false;
     }else{
@@ -36,81 +36,83 @@ function errorFree(data) {
 function query(q) {
     document.location.hash = q;
     $.getJSON("query?q=" + q, function(data) {
-        if (errorFree(data) == false) return;
+        if (errorFree(data) === false) { return; }
 
         hideAllSections();
         $("#results").show();
         $("#resultsBody").html("");
         $("#queryString").html(q);
 
-        for(item in data["results"]) {
+        for(var item in data.results) {
             $("#resultsBody").append("<tr><td>"+
-                                    "<a href='#code:"+data["results"][item][0]+"' onClick=\"loadPart('"+ data["results"][item] + "');\">"
-                                    + data["results"][item][0] +"</a></td>"
-                                    +"<td>"+ data["results"][item][1] + "</td>" 
-                                    +"<td>"+ data["results"][item][2] + "</td>"
+                                    "<a href='#code:"+data.results[item][0]+"' onClick=\"loadPart('"+ data.results[item] + "');\">"
+                                    + data.results[item][0] +"</a></td>"
+                                    +"<td>"+ data.results[item][1] + "</td>" 
+                                    +"<td>"+ data.results[item][2] + "</td>"
                                     +"</tr>");
         }
     });
 }
 
 function loadPart(code) {
-    document.location.hash = "code:" + code
+    document.location.hash = "code:" + code;
     $.getJSON("part?q=" + code, function(data) {
-        if (errorFree(data) == false) return;
+        if (errorFree(data) === false) { return; }
+        var i;
 
         //converts links in brackets to actual links
-        data["description"] = data["description"].replace(/\((http[s]?:\/\/[^\)]*)\)/gi, "<a href=\"$1\">$1</a>");
+        data.description = data.description.replace(/\((http[s]?:\/\/[^\)]*)\)/gi, "<a href=\"$1\">$1</a>");
 
-        if(data["type"] == "Item") {
+        if(data.type == "Item") {
             hideAllSections();
             $("#item").show();
-            $("#item_code").attr("href", "#code:" + data["code"]);
-            $("#item_name").attr("href", "#type:" + data["name"]);
+            $("#item_code").attr("href", "#code:" + data.code);
+            $("#item_name").attr("href", "#type:" + data.name);
             //TODO: this stops you loading other pages for some reason
             //$("#item_code").click(loadPart(data["code"]));
 
-            for(var i in data) {
+            for(i in data) {
                 if(i == "parent") {
-                    parent_line = "<a href='#code:" + data["parent"]["code"]
+                    var parentLine = "<a href='#code:" + data.parent.code
                                   + "' onClick=\"loadPart('"
-                                  + data["parent"]["code"] + "')\">"
-                                  + data["parent"]["name"] + "</a>";
-                    $("#item_parent").html(parent_line);
+                                  + data.parent.code + "')\">"
+                                  + data.parent.name + "</a>";
+                    $("#item_parent").html(parentLine);
                 }else{
                     $("#item_" + i).html(data[i]);
                 }
             }
-        }else if(data["type"] == "ItemGroup") {
+        }else if(data.type == "ItemGroup") {
             hideAllSections();
             $("#itemgroup").show();
-
-            for(var i in data) {
+            
+            for(i in data) {
                 $("#itemgroup_" + i).html(data[i]);
             }
 
-            if(data["parent"].hasOwnProperty("code")) {
-                parentLine = "<a href='#code:" + data["parent"]["code"]
+            var parentLine;
+            if(data.parent.hasOwnProperty("code")) {
+                parentLine = "<a href='#code:" + data.parent.code
                               + "' onClick=\"loadPart('"
-                              + data["parent"]["code"] + "')\">"
-                              + data["parent"]["name"] + "</a>";
+                              + data.parent.code + "')\">"
+                              + data.parent.name + "</a>";
             }else{
-                parentLine = data["parent"].path;
+                parentLine = data.parent.path;
             }
 
             $("#itemgroup_parent").html(parentLine);
-            $("#itemgroup_parts_number").html(data["parts"].length);
-            $("#itemgroup_code").attr("href", "#code:" + data["code"]);
-            $("#itemgroup_name").attr("href", "#type:" + data["name"]);
+            $("#itemgroup_parts_number").html(data.parts.length);
+            $("#itemgroup_code").attr("href", "#code:" + data.code);
+            $("#itemgroup_name").attr("href", "#type:" + data.name);
             $("#itemgroup_table").hide();
 
-            for(var i in data["parts"]) {
-                part = data["parts"][i];
-                var part_line = "<tr><td><a href='#code:"+ part.code
+            for(i in data.parts) {
+                var part = data.parts[i];
+                var partLine = "<tr><td><a href='#code:"+ part.code
                                 + "' onclick=\"loadPart('"+part.code+"')\">"
                                 + part.code + "</a></td><td>" + part.name + "</td></tr>\n";
 
-                $("#itemgroup_parts").append(part_line);
+                $("#itemgroup_parts").append(partLine);
             }
         }
     });
