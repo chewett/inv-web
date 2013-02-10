@@ -59,6 +59,9 @@ function loadPart(code) {
     $.getJSON("part?q=" + code, function(data) {
         if (errorFree(data) == false) return;
 
+        //converts links in brackets to actual links
+        data["description"] = data["description"].replace(/\((http[s]?:\/\/[^\)]*)\)/gi, "<a href=\"$1\">$1</a>");
+
         if(data["type"] == "Item") {
             hideAllSections();
             $("#item").show();
