@@ -1,23 +1,30 @@
 
 var hash = "";
 
-
-$(document).ready(function() {
-    var page = window.location.href.split("#")[1];
-
-    if(page !== undefined && page !== "") {
-        query(page);
-    }
-
-    setInterval("trackHash()", 50);
-});
-
 function trackHash() {
     var curHash = location.hash.split("#")[1];
 
     if(curHash != hash) {
         hash = curHash;
-        query(curHash);
+
+        handleHash(curHash);
+    }
+}
+
+$(document).ready(function() {
+    setInterval(trackHash, 50);
+});
+
+function handleHash(hash) {
+    if(hash == undefined || hash.length < 2) {
+        return;
+    }
+
+    hashType = hash.split("/")[0];
+    if(hashType == "!part") {
+        loadPart(hash.substring(6));
+    }else if(hashType == "!query") {
+        query(hash.substring(7));
     }
 }
 
@@ -48,7 +55,9 @@ function errorFree(data) {
 }
 
 function query(q) {
-    document.location.hash = q;
+    hash = "!query/" + q;
+    document.location.hash = "!query/" + q;
+
     $.getJSON("query?q=" + q, function(data) {
         if (errorFree(data) === false) { return; }
 
@@ -59,7 +68,7 @@ function query(q) {
 
         for(var item in data.results) {
             $("#resultsBody").append("<tr><td>"+
-                                    "<a href='#code:"+data.results[item][0]+"' onClick=\"loadPart('"+ data.results[item] + "');\">"
+                                    "<a href='#!part/"+data.results[item][0]+"' onClick=\"loadPart('"+ data.results[item] + "');\">"
                                     + data.results[item][0] +"</a></td>"
                                     +"<td>"+ data.results[item][1] + "</td>" 
                                     +"<td>"+ data.results[item][2] + "</td>"
@@ -69,7 +78,8 @@ function query(q) {
 }
 
 function loadPart(code) {
-    document.location.hash = "code:" + code;
+    hash = "!part/" + code;
+    document.location.hash = "!part/" + code;
     $.getJSON("part?q=" + code, function(data) {
         if (errorFree(data) === false) { return; }
         var i;
@@ -80,14 +90,14 @@ function loadPart(code) {
         if(data.type == "Item") {
             hideAllSections();
             $("#item").show();
-            $("#item_code").attr("href", "#code:" + data.code);
-            $("#item_name").attr("href", "#type:" + data.name);
+            $("#item_code").attr("href", "#!part/" + data.code);
+            $("#item_name").attr("href", "#!query/type:" + data.name);
             //TODO: this stops you loading other pages for some reason
             //$("#item_code").click(loadPart(data["code"]));
 
             for(i in data) {
                 if(i == "parent") {
-                    var parentLine = "<a href='#code:" + data.parent.code
+                    var parentLine = "<a href='#!part/" + data.parent.code
                                   + "' onClick=\"loadPart('"
                                   + data.parent.code + "')\">"
                                   + data.parent.name + "</a>";
@@ -99,14 +109,14 @@ function loadPart(code) {
         }else if(data.type == "ItemGroup") {
             hideAllSections();
             $("#itemgroup").show();
-            
+
             for(i in data) {
                 $("#itemgroup_" + i).html(data[i]);
             }
 
             var parentLine;
             if(data.parent.hasOwnProperty("code")) {
-                parentLine = "<a href='#code:" + data.parent.code
+                parentLine = "<a href='#!part/" + data.parent.code
                               + "' onClick=\"loadPart('"
                               + data.parent.code + "')\">"
                               + data.parent.name + "</a>";
@@ -116,13 +126,13 @@ function loadPart(code) {
 
             $("#itemgroup_parent").html(parentLine);
             $("#itemgroup_parts_number").html(data.parts.length);
-            $("#itemgroup_code").attr("href", "#code:" + data.code);
-            $("#itemgroup_name").attr("href", "#type:" + data.name);
+            $("#itemgroup_code").attr("href", "#!part/" + data.code);
+            $("#itemgroup_name").attr("href", "#!query/type:" + data.name);
             $("#itemgroup_table").hide();
 
             for(i in data.parts) {
                 var part = data.parts[i];
-                var partLine = "<tr><td><a href='#code:"+ part.code
+                var partLine = "<tr><td><a href='#!part/"+ part.code
                                 + "' onclick=\"loadPart('"+part.code+"')\">"
                                 + part.code + "</a></td><td>" + part.name + "</td></tr>\n";
 
