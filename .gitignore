@@ -1,3 +1,6 @@
 inventory/*
 tools/*
 jquery.js
+*.exe
+bottle.py
+*.pyc
