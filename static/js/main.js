@@ -1,11 +1,25 @@
 
+var hash = "";
+
+
 $(document).ready(function() {
     var page = window.location.href.split("#")[1];
 
     if(page !== undefined && page !== "") {
         query(page);
     }
+
+    setInterval("trackHash()", 50);
 });
+
+function trackHash() {
+    var curHash = location.hash.split("#")[1];
+
+    if(curHash != hash) {
+        hash = curHash;
+        query(curHash);
+    }
+}
 
 function hideAllSections() {
     $("#results").hide();
