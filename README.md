@@ -13,8 +13,6 @@ To set up an instance of inv-web you need:
 * dependencies for [sr tools](https://www.studentrobotics.org/trac/wiki/DevScripts)
 * dependencies for the [inventory](https://www.studentrobotics.org/trac/wiki/Inventory)
 
-Note: inv-web relies on the invquery branch of sr tools which is currently available on [github](https://github.com/chrisjameskirkham/tools)
-
 Once inv-web has been cloned you will want to clone sr tools and the inventory into the inv-web directory. Or modify the api.py script to change the path it looks for the inventory and tools.
 
 Bottle includes its own webserver, which can be stated with python api.py which currently sets up a webserver on port 8080 (can be changed in the api.py).
