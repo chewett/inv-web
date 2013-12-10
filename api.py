@@ -1,4 +1,4 @@
-from bottle import Bottle, run, request, static_file
+from bottle import Bottle, run, route, request, static_file
 import urllib2
 import sys, os
 from pyparsing import ParseException
@@ -61,7 +61,7 @@ def get_parent(part):
 
     return parent_info
 
-@app.route("/query")
+@route("/query")
 def _query():
     q = request.query.q
     q = urllib2.unquote(q)
@@ -73,7 +73,7 @@ def _query():
     results =  [[part.code, part.name, clean_path(part.path)] for part in matches]
     return {"results" : results}
 
-@app.route("/part")
+@route("/part")
 def _part():
     q = request.query.q
     q = urllib2.unquote(q)
@@ -88,12 +88,12 @@ def _part():
     return part_json(item)
 
 
-@app.route("/static/<directory>/<filename>")
+@route("/static/<directory>/<filename>")
 def static_resource(directory, filename):
     return static_file("/static/"+directory+"/"+filename, root=PATH)
 
-@app.route("/")
-@app.route("/index.html")
+@route("/")
+@route("/index.html")
 def index_page():
     return static_file("/static/index.html", root=PATH)
 
